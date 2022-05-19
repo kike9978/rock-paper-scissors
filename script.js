@@ -72,11 +72,11 @@ function game() {
         console.log(`i vale ${i}`)
         console.log(`Puntaje de la compu: ${pcScore}`);
         
-        let estadoDeRonda = playRound(computerSelection);
+        let estadoDeRonda;
+        estadoDeRonda = playRound(computerSelection);
             
         if (estadoDeRonda === "empate") {
             i--;
-
             round ++;
             
         } else 
