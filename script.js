@@ -1,37 +1,49 @@
 
 
 
-
+// Arreglo de opciones
 const ELEMENTOS = ["piedra", "papel", "tijeras"];
+
+
+// Elección de compu
 
 function counterPlay() {
     let tiroDeCompu = ELEMENTOS[Math.floor((Math.random() * ELEMENTOS.length))];
     return tiroDeCompu;
 
 }
-const computerSelection
- = counterPlay();
 
 
-function playRound(computerSelection
-    ) {
+
+
+
+// Juega una ronda
+
+function playRound(computerSelection) {
+
+    console.log(computerSelection);
     
+    let ganadorRonda;
 
-    console.log(computerSelection
-        );
     let playerSelection = prompt("Escoge tu arma: piedra, papel o tijeras");
 
     if (playerSelection === null) {
-        alert("Cancelado por no querer jugar");
-        return;
+        if (confirm("¿Quieres salir del juego?")) {
+            alert("Tu te lo pierdes, al fin que ni quería")
+            ganadorRonda = "termino";
+            return ganadorRonda;
+        } else {
+            alert("bueno")
+            return playRound(computerSelection);
+        }
     }
 
     playerSelection = playerSelection.toLowerCase();
 
-    let ganadorRonda;
+    
 
     if (playerSelection === "") {
-        alert("Cancelado por no querer jugar");
+        confirm("Cancelado por no querer jugar");
         return;
 
     } else if (playerSelection != "papel" && playerSelection != "piedra" && playerSelection != "tijeras") {
@@ -73,7 +85,11 @@ function game() {
         console.log(`Puntaje de la compu: ${pcScore}`);
         
         let estadoDeRonda;
+        let computerSelection = counterPlay();
         estadoDeRonda = playRound(computerSelection);
+        if(estadoDeRonda ==="termino"){
+            break;
+        }
             
         if (estadoDeRonda === "empate") {
             i--;
