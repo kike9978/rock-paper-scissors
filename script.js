@@ -1,6 +1,7 @@
 const btnLance = document.querySelector(".lance");
 const btnSword = document.querySelector(".sword");
 const btnAxe = document.querySelector(".axe");
+const btns = document.querySelectorAll("button");
 
 
 // Arreglo de opciones
@@ -31,41 +32,41 @@ function playRound(computerSelection, playerSelection) {
 
     if (playerSelection === null) {
         if (confirm("¿Quieres salir del juego?")) {
-            alert("Tu te lo pierdes, al fin que ni quería")
+            console.log("Tu te lo pierdes, al fin que ni quería")
             ganadorRonda = "termino";
             return ganadorRonda;
         } else {
-            alert("bueno")
+            console.log("bueno")
             return playRound(computerSelection);
         }
     }
 
-    playerSelection = playerSelection.toLowerCase();
+    // playerSelection = playerSelection.toLowerCase();
 
     if (playerSelection === "") {
         confirm("Cancelado por no querer jugar");
         return;
 
-    } else if (playerSelection != "papel" && playerSelection != "piedra" && playerSelection != "tijeras") {
-        alert("¿Qué te pasa broder, escoge una de las opciones: piedra, papel o tijeras");
-        return playRound(computerSelection
-            );
+    // } else if (playerSelection != "papel" && playerSelection != "piedra" && playerSelection != "tijeras") {
+    //     console.log("¿Qué te pasa broder, escoge una de las opciones: piedra, papel o tijeras");
+    //     return playRound(computerSelection
+    //         );
     } else {
         if (playerSelection == computerSelection
             ) {
-            alert("empate, que chafa");
+            console.log("empate, que chafa");
             empate = "empate";
             return empate;
         } else if (playerSelection == "tijeras" && computerSelection
          == "piedra" || playerSelection == "piedra" && computerSelection
          == "papel" || playerSelection == "papel" && computerSelection
          == "tijeras") {
-            alert(`naaambre, que perdedor, ${computerSelection
+            console.log(`naaambre, que perdedor, ${computerSelection
             } le gana a ${playerSelection}`);
             ganadorRonda = "perdedor";
             return ganadorRonda;
         } else {
-            alert("buena campeón");
+            console.log("buena campeón");
             ganadorRonda = "ganador";
             return ganadorRonda;
 
@@ -73,7 +74,16 @@ function playRound(computerSelection, playerSelection) {
     }
 }
 
-btnAxe.addEventListener("click",playRound(counterPlay(), "tijeras"));
+btnAxe.addEventListener("click", chooseWeapon);
+btnLance.addEventListener("click", chooseWeapon);
+btnSword.addEventListener("click", chooseWeapon);
+
+function  chooseWeapon(e){
+    console.log(e.currentTarget.getAttribute("data-weapon"));
+    playRound(counterPlay(),e.currentTarget.getAttribute("data-weapon"));
+}
+
+
 
 
 
