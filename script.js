@@ -2,10 +2,13 @@ const btnLance = document.querySelector(".lance");
 const btnSword = document.querySelector(".sword");
 const btnAxe = document.querySelector(".axe");
 const btns = document.querySelectorAll("button");
+const para = document.querySelector(".results p");
 
+
+para.textContent = "El resultado es";
 
 // Arreglo de opciones
-const ELEMENTOS = ["piedra", "papel", "tijeras"];
+const ELEMENTOS = ["sword", "axe", "lance"];
 
 
 // Elección de compu
@@ -24,7 +27,7 @@ function counterPlay() {
 
 function playRound(computerSelection, playerSelection) {
 
-    console.log(computerSelection);
+    para.textContent += computerSelection;
     
     let ganadorRonda;
 
@@ -32,11 +35,11 @@ function playRound(computerSelection, playerSelection) {
 
     if (playerSelection === null) {
         if (confirm("¿Quieres salir del juego?")) {
-            console.log("Tu te lo pierdes, al fin que ni quería")
+            para.textContent += "Tu te lo pierdes, al fin que ni quería";
             ganadorRonda = "termino";
             return ganadorRonda;
         } else {
-            console.log("bueno")
+            para.textContent += "bueno";
             return playRound(computerSelection);
         }
     }
@@ -48,25 +51,25 @@ function playRound(computerSelection, playerSelection) {
         return;
 
     // } else if (playerSelection != "papel" && playerSelection != "piedra" && playerSelection != "tijeras") {
-    //     console.log("¿Qué te pasa broder, escoge una de las opciones: piedra, papel o tijeras");
+    //     para.textContent += "¿Qué te pasa broder, escoge una de las opciones: piedra, papel o tijeras");
     //     return playRound(computerSelection
     //         );
     } else {
         if (playerSelection == computerSelection
             ) {
-            console.log("empate, que chafa");
+            para.textContent += "empate, que chafa";
             empate = "empate";
             return empate;
-        } else if (playerSelection == "tijeras" && computerSelection
-         == "piedra" || playerSelection == "piedra" && computerSelection
-         == "papel" || playerSelection == "papel" && computerSelection
-         == "tijeras") {
-            console.log(`naaambre, que perdedor, ${computerSelection
-            } le gana a ${playerSelection}`);
+        } else if (playerSelection == "lance" && computerSelection
+         == "axe" || playerSelection == "axe" && computerSelection
+         == "sword" || playerSelection == "sword" && computerSelection
+         == "axe") {
+            para.textContent += `naaambre, que perdedor, ${computerSelection
+            } le gana a ${playerSelection}`;
             ganadorRonda = "perdedor";
             return ganadorRonda;
         } else {
-            console.log("buena campeón");
+            para.textContent += "buena campeón";
             ganadorRonda = "ganador";
             return ganadorRonda;
 
@@ -74,13 +77,15 @@ function playRound(computerSelection, playerSelection) {
     }
 }
 
-btnAxe.addEventListener("click", chooseWeapon);
-btnLance.addEventListener("click", chooseWeapon);
-btnSword.addEventListener("click", chooseWeapon);
+// btnAxe.addEventListener("click", chooseWeapon);
+// btnLance.addEventListener("click", chooseWeapon);
+// btnSword.addEventListener("click", chooseWeapon);
+
+btns.forEach(btn => btn.addEventListener("click", chooseWeapon));
 
 function  chooseWeapon(e){
-    console.log(e.currentTarget.getAttribute("data-weapon"));
-    playRound(counterPlay(),e.currentTarget.getAttribute("data-weapon"));
+    para.textContent += e.currentTarget.classList.value;
+    playRound(counterPlay(),e.currentTarget.classList.value);
 }
 
 
@@ -93,10 +98,10 @@ function game() {
     let playerScore = 0;
     let pcScore = 0;
     // for (let i = 0; i <= 5; i++) {
-    //     console.log(`Ronda: ${round}`);
-    //     console.log(`Puntaje de jugador: ${playerScore}`);
-    //     console.log(`i vale ${i}`)
-    //     console.log(`Puntaje de la compu: ${pcScore}`);
+    //     para.textContent += `Ronda: ${round}`);
+    //     para.textContent += `Puntaje de jugador: ${playerScore}`);
+    //     para.textContent += `i vale ${i}`)
+    //     para.textContent += `Puntaje de la compu: ${pcScore}`);
         
     //     let estadoDeRonda;
     //     let computerSelection = counterPlay();
