@@ -69,26 +69,46 @@ function cancelarJuego() {
     // Cancela el juego no?
 }
 
-let round = 0;
-let playerScore = 0;
-let pcScore = 0;
 
 
 
 
 btns.forEach(btn => btn.addEventListener("click", chooseWeapon));
 
+let round = 0;
+let playerScore = 0;
+let pcScore = 0;
+
+// With each botton click compares the 2 picks and display the result
+// Also keeps the score
+
+
 function chooseWeapon(e) {
 
     para.textContent += e.currentTarget.classList.value;
-    playRound(counterPlay(), e.currentTarget.classList.value);
-    ronda.textContent = ++round;
-    console.log(round);
-    if (round === 5) {
+    let turno;
+    turno = playRound(counterPlay(), e.currentTarget.classList.value);
+
+    if (turno === "empate") {
+
+    } else if (turno === "perdedor") {
+        pcScore++;
+
+    } else {
+        playerScore++;
+    }
+
+    round++;
+    
+    ronda.textContent = round;
+    pJugador.textContent = playerScore;
+    pCpu.textContent = pcScore;
+
+    if (pcScore === 5 || playerScore === 5) {
         para.textContent = "Se acabó";
         btns.forEach(btn => btn.removeEventListener("click", chooseWeapon));
-    
     }
+
 }
 
 
@@ -111,19 +131,19 @@ function chooseWeapon(e) {
 
 //     for (let i = 0; i <= 5; i++) {
 
-//         let xia;
+//         let turno;
 //         let computerSelection = counterPlay();
 //         console.log(computerSelection);
 //         console.log(round);
-//         console.log(xia);
+//         console.log(turno);
 
-//         if (xia === "termino") {
+//         if (turno === "termino") {
 //             break;
 //         }
-//         if (xia === "empate") {
+//         if (turno === "empate") {
 //             i--;
 //             round++;
-//         } else if (xia === "perdedor") {
+//         } else if (turno === "perdedor") {
 //             pcScore++;
 //             round++;
 //         } else {
