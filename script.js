@@ -1,131 +1,139 @@
+const h1 = document.querySelector("h1");
 const btnLance = document.querySelector(".lance");
 const btnSword = document.querySelector(".sword");
 const btnAxe = document.querySelector(".axe");
 const btns = document.querySelectorAll("button");
-const para = document.querySelector(".results p");
+const results = document.querySelector(".results");
+const para = document.createElement("p");
+const pJugador = document.querySelector(`[data-puntaje="jugador"]`);
+const pCpu = document.querySelector(`[data-puntaje="cpu"]`);
+const ronda = document.querySelector(`[data-puntaje="ronda"]`);
 
-
+pJugador.textContent = 0;
+pCpu.textContent = 0;
+ronda.textContent = 0;
 para.textContent = "El resultado es";
 
 // Arreglo de opciones
 const ELEMENTOS = ["sword", "axe", "lance"];
 
-
 // Elección de compu
-
 function counterPlay() {
     let tiroDeCompu = ELEMENTOS[Math.floor((Math.random() * ELEMENTOS.length))];
     return tiroDeCompu;
-
 }
 
-
-
-
-
 // Juega una ronda
-
 function playRound(computerSelection, playerSelection) {
-
     para.textContent += computerSelection;
-    
-    let ganadorRonda;
-
-    // let playerSelection = prompt("Escoge tu arma: piedra, papel o tijeras");
+    let estadoDeRonda;
 
     if (playerSelection === null) {
         if (confirm("¿Quieres salir del juego?")) {
             para.textContent += "Tu te lo pierdes, al fin que ni quería";
-            ganadorRonda = "termino";
-            return ganadorRonda;
+            estadoDeRonda = "termino";
+            return estadoDeRonda;
         } else {
             para.textContent += "bueno";
             return playRound(computerSelection);
         }
     }
 
-    // playerSelection = playerSelection.toLowerCase();
+    const ESTADODERONDA_EMPATE = "empate";
+    const ESTADODERONDA_GANAJUGADOR = "ganador";
+    const ESTADODERONDA_GANACPU = "perdedor";
 
-    if (playerSelection === "") {
-        confirm("Cancelado por no querer jugar");
-        return;
-
-    // } else if (playerSelection != "papel" && playerSelection != "piedra" && playerSelection != "tijeras") {
-    //     para.textContent += "¿Qué te pasa broder, escoge una de las opciones: piedra, papel o tijeras");
-    //     return playRound(computerSelection
-    //         );
+    if (playerSelection === computerSelection
+    ) {
+        para.textContent = "empate, que chafa";
+        results.appendChild(para);
+        estadoDeRonda = ESTADODERONDA_EMPATE;
+        return estadoDeRonda;
+    } else if (playerSelection === "lance" && computerSelection
+        === "axe" || playerSelection === "axe" && computerSelection
+        === "sword" || playerSelection === "sword" && computerSelection
+        === "lance") {
+        para.textContent = `naaambre, que perdedor, ${computerSelection} le gana a ${playerSelection}`;
+        results.appendChild(para);
+        estadoDeRonda = ESTADODERONDA_GANACPU;
+        return estadoDeRonda;
     } else {
-        if (playerSelection == computerSelection
-            ) {
-            para.textContent += "empate, que chafa";
-            empate = "empate";
-            return empate;
-        } else if (playerSelection == "lance" && computerSelection
-         == "axe" || playerSelection == "axe" && computerSelection
-         == "sword" || playerSelection == "sword" && computerSelection
-         == "axe") {
-            para.textContent += `naaambre, que perdedor, ${computerSelection
-            } le gana a ${playerSelection}`;
-            ganadorRonda = "perdedor";
-            return ganadorRonda;
-        } else {
-            para.textContent += "buena campeón";
-            ganadorRonda = "ganador";
-            return ganadorRonda;
-
-        }
+        para.textContent = "buena campeón";
+        results.appendChild(para);
+        estadoDeRonda = ESTADODERONDA_GANAJUGADOR;
+        return estadoDeRonda;
     }
 }
 
-// btnAxe.addEventListener("click", chooseWeapon);
-// btnLance.addEventListener("click", chooseWeapon);
-// btnSword.addEventListener("click", chooseWeapon);
+function cancelarJuego() {
+    // Cancela el juego no?
+}
+
+let round = 0;
+let playerScore = 0;
+let pcScore = 0;
+
+
+
 
 btns.forEach(btn => btn.addEventListener("click", chooseWeapon));
 
-function  chooseWeapon(e){
+function chooseWeapon(e) {
+
     para.textContent += e.currentTarget.classList.value;
-    playRound(counterPlay(),e.currentTarget.classList.value);
+    playRound(counterPlay(), e.currentTarget.classList.value);
+    ronda.textContent = ++round;
+    console.log(round);
+    if (round === 5) {
+        para.textContent = "Se acabó";
+        btns.forEach(btn => btn.removeEventListener("click", chooseWeapon));
+    
+    }
 }
 
 
 
 
 
+// function game() {
 
-function game() {
-    let round = 0;
-    let playerScore = 0;
-    let pcScore = 0;
-    // for (let i = 0; i <= 5; i++) {
-    //     para.textContent += `Ronda: ${round}`);
-    //     para.textContent += `Puntaje de jugador: ${playerScore}`);
-    //     para.textContent += `i vale ${i}`)
-    //     para.textContent += `Puntaje de la compu: ${pcScore}`);
-        
-    //     let estadoDeRonda;
-    //     let computerSelection = counterPlay();
-    //     estadoDeRonda = playRound(computerSelection);
-    //     if(estadoDeRonda ==="termino"){
-    //         break;
-    //     }
-            
-    //     if (estadoDeRonda === "empate") {
-    //         i--;
-    //         round ++;
-            
-    //     } else 
-    //     if (estadoDeRonda === "perdedor") {
-    //         pcScore++;
-    //         round ++;
 
-    //     } else {
-    //         playerScore ++;
-    //         round ++;
-    //     }
+//     pCpu.textContent = playerScore;
+//     pJugador.textContent = pcScore;
 
-    // }
-}
+//     btns.forEach(btn => btn.addEventListener("click", chooseWeapon));
+
+//     function chooseWeapon(e) {
+//         let seleccionDePersonaje = e.currentTarget.classList.value;
+//         para.textContent += seleccionDePersonaje;
+//         playRound(counterPlay(), seleccionDePersonaje);
+//     }
+
+//     for (let i = 0; i <= 5; i++) {
+
+//         let xia;
+//         let computerSelection = counterPlay();
+//         console.log(computerSelection);
+//         console.log(round);
+//         console.log(xia);
+
+//         if (xia === "termino") {
+//             break;
+//         }
+//         if (xia === "empate") {
+//             i--;
+//             round++;
+//         } else if (xia === "perdedor") {
+//             pcScore++;
+//             round++;
+//         } else {
+//             playerScore++;
+//             round++;
+//         }
+//     }
+// }
+
+
 
 
 // Create button variable
@@ -140,6 +148,6 @@ function game() {
 //  
 
 
-// game();
+
 
 
