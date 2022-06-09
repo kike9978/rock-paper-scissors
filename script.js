@@ -1,3 +1,4 @@
+const game = document.querySelector(".game");
 const h1 = document.querySelector("h1");
 const btnLance = document.querySelector(".lance");
 const btnSword = document.querySelector(".sword");
@@ -8,6 +9,8 @@ const para = document.createElement("p");
 const pJugador = document.querySelector(`[data-puntaje="jugador"]`);
 const pCpu = document.querySelector(`[data-puntaje="cpu"]`);
 const ronda = document.querySelector(`[data-puntaje="ronda"]`);
+const btn = document.createElement("button");
+
 
 pJugador.textContent = 0;
 pCpu.textContent = 0;
@@ -43,8 +46,7 @@ function playRound(computerSelection, playerSelection) {
     const ESTADODERONDA_GANAJUGADOR = "ganador";
     const ESTADODERONDA_GANACPU = "perdedor";
 
-    if (playerSelection === computerSelection
-    ) {
+    if (playerSelection === computerSelection) {
         para.textContent = "empate, que chafa";
         results.appendChild(para);
         estadoDeRonda = ESTADODERONDA_EMPATE;
@@ -69,22 +71,18 @@ function cancelarJuego() {
     // Cancela el juego no?
 }
 
-
-
-
-
 btns.forEach(btn => btn.addEventListener("click", chooseWeapon));
 
 let round = 0;
 let playerScore = 0;
 let pcScore = 0;
 
+
 // With each botton click compares the 2 picks and display the result
 // Also keeps the score
 
 
 function chooseWeapon(e) {
-
     para.textContent += e.currentTarget.classList.value;
     let turno;
     turno = playRound(counterPlay(), e.currentTarget.classList.value);
@@ -99,7 +97,7 @@ function chooseWeapon(e) {
     }
 
     round++;
-    
+
     ronda.textContent = round;
     pJugador.textContent = playerScore;
     pCpu.textContent = pcScore;
@@ -107,67 +105,40 @@ function chooseWeapon(e) {
     if (pcScore === 5 || playerScore === 5) {
         para.textContent = "Se acabó";
         btns.forEach(btn => btn.removeEventListener("click", chooseWeapon));
+        volverAJugar();
     }
 
 }
 
+function volverAJugar() {
 
+    btn.textContent = "Volver a jugar";
+    btn.classList.value = ".replay-btn";
+    btn.setAttribute("data-type", "reset-btn")
+    game.appendChild(btn);
+    btn.addEventListener("click", () => btns.forEach(btn => btn.addEventListener("click", chooseWeapon)));
+    btn.addEventListener("click", resetearJuego);
+}
 
-
-
-// function game() {
-
-
-//     pCpu.textContent = playerScore;
-//     pJugador.textContent = pcScore;
-
-//     btns.forEach(btn => btn.addEventListener("click", chooseWeapon));
-
-//     function chooseWeapon(e) {
-//         let seleccionDePersonaje = e.currentTarget.classList.value;
-//         para.textContent += seleccionDePersonaje;
-//         playRound(counterPlay(), seleccionDePersonaje);
-//     }
-
-//     for (let i = 0; i <= 5; i++) {
-
-//         let turno;
-//         let computerSelection = counterPlay();
-//         console.log(computerSelection);
-//         console.log(round);
-//         console.log(turno);
-
-//         if (turno === "termino") {
-//             break;
-//         }
-//         if (turno === "empate") {
-//             i--;
-//             round++;
-//         } else if (turno === "perdedor") {
-//             pcScore++;
-//             round++;
-//         } else {
-//             playerScore++;
-//             round++;
-//         }
-//     }
-// }
-
-
-
-
-// Create button variable
-// Battle bgm (maybe from Valentia or smthing)
-// Welcome the player with fire emblem story
-// Ask user for weapon of choice
-// Get player selection
-//  button.addEventListener("click", getButtonClass(){
-//  
-//})
-// Display winner
-//  
-
-
-
-
-
+function resetearJuego() {
+    round = 0;
+    playerScore = 0;
+    pcScore = 0;
+    ronda.textContent = round;
+    pJugador.textContent = playerScore;
+    pCpu.textContent = pcScore;
+    para.textContent = "";
+    // game.childNodes.forEach(function(item) {
+    //     if (item.classList == ".replay-btn"){
+    //         item.remove();
+    //     }
+    // });
+    // Used game.Children instead of game.childNodes because i want to get the data type attribute
+    const gameChildren = game.children;
+    for (let i = 0; i < gameChildren.length; i++) {
+        if (gameChildren[i].getAttribute("data-type") === "reset-btn") {
+            gameChildren[i].remove();
+        }
+    }
+    // document.querySelector(".replay-btn").remove();
+}
