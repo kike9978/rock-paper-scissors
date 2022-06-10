@@ -73,7 +73,7 @@ function cancelarJuego() {
 
 btns.forEach(btn => btn.addEventListener("click", chooseWeapon));
 
-let round = 0;
+let round = 1;
 let playerScore = 0;
 let pcScore = 0;
 
@@ -127,7 +127,7 @@ function volverAJugar() {
 }
 
 function resetearJuego() {
-    round = 0;
+    round = 1;
     playerScore = 0;
     pcScore = 0;
     ronda.textContent = round;
