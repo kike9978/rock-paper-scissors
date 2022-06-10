@@ -74,6 +74,9 @@ function cancelarJuego() {
 btns.forEach(btn => btn.addEventListener("click", chooseWeapon));
 
 let round = 1;
+ronda.textContent = round;
+console.log(ronda.textContent);
+console.log(round);
 let playerScore = 0;
 let pcScore = 0;
 
@@ -99,6 +102,7 @@ function chooseWeapon(e) {
     round++;
 
     ronda.textContent = round;
+    console.log(ronda.textContent);
     pJugador.textContent = playerScore;
     pCpu.textContent = pcScore;
 
