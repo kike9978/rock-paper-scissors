@@ -19,6 +19,8 @@ li{
     list-style: none;
 }
 button{
+    display: flex;
+    cursor: pointer;
     height: fit-content;
     padding: 0;
     border-style: none;
@@ -28,10 +30,18 @@ button{
 button:hover{
     transform: scale(1.1);
     border-style: solid;
-    border-color: yellow;
-    box-shadow: 0 0 10px yellow;
+    border-color: rgb(247, 32, 53);
 }
 
 .results{
     text-align: center;
+}
+
+.replay-btn{
+    border: solid;
+    background-color: aliceblue;
+}
+
+.replay-btn:hover{
+    border-color: rgb(44, 114, 114);
 }

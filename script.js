@@ -47,7 +47,7 @@ function playRound(computerSelection, playerSelection) {
     const ESTADODERONDA_GANACPU = "perdedor";
 
     if (playerSelection === computerSelection) {
-        para.textContent = "empate, que chafa";
+        para.textContent = "Empate, que chafa";
         results.appendChild(para);
         estadoDeRonda = ESTADODERONDA_EMPATE;
         return estadoDeRonda;
@@ -55,12 +55,12 @@ function playRound(computerSelection, playerSelection) {
         === "axe" || playerSelection === "axe" && computerSelection
         === "sword" || playerSelection === "sword" && computerSelection
         === "lance") {
-        para.textContent = `naaambre, que perdedor, ${computerSelection} le gana a ${playerSelection}`;
+        para.textContent = `Naaambre, que perdedor, ${computerSelection} le gana a ${playerSelection}`;
         results.appendChild(para);
         estadoDeRonda = ESTADODERONDA_GANACPU;
         return estadoDeRonda;
     } else {
-        para.textContent = "buena campeón";
+        para.textContent = `Buena campeón, ${playerSelection} le gana a ${computerSelection}`;
         results.appendChild(para);
         estadoDeRonda = ESTADODERONDA_GANAJUGADOR;
         return estadoDeRonda;
@@ -103,7 +103,13 @@ function chooseWeapon(e) {
     pCpu.textContent = pcScore;
 
     if (pcScore === 5 || playerScore === 5) {
-        para.textContent = "Se acabó";
+        let ganador;
+        if (pcScore>playerScore){
+            ganador = "la CPU";
+        }else{
+            ganador = "el jugador"
+        }
+        para.textContent = `Se acabó, el ganador es ${ganador}`;
         btns.forEach(btn => btn.removeEventListener("click", chooseWeapon));
         volverAJugar();
     }
@@ -113,7 +119,7 @@ function chooseWeapon(e) {
 function volverAJugar() {
 
     btn.textContent = "Volver a jugar";
-    btn.classList.value = ".replay-btn";
+    btn.classList.value = "replay-btn";
     btn.setAttribute("data-type", "reset-btn")
     game.appendChild(btn);
     btn.addEventListener("click", () => btns.forEach(btn => btn.addEventListener("click", chooseWeapon)));
