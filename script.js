@@ -138,17 +138,10 @@ function resetearJuego() {
     pJugador.textContent = playerScore;
     pCpu.textContent = pcScore;
     para.textContent = "";
-    // game.childNodes.forEach(function(item) {
-    //     if (item.classList == ".replay-btn"){
-    //         item.remove();
-    //     }
-    // });
-    // Used game.Children instead of game.childNodes because i want to get the data type attribute
     const gameChildren = game.children;
     for (let i = 0; i < gameChildren.length; i++) {
         if (gameChildren[i].getAttribute("data-type") === "reset-btn") {
             gameChildren[i].remove();
         }
     }
-    // document.querySelector(".replay-btn").remove();
 }
