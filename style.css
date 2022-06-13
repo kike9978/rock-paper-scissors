@@ -1,8 +1,31 @@
+@font-face {
+    font-family: chiaroStd;
+    src: url(./fonts/FOT-ChiaroStd-B.otf);
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background-image: linear-gradient(180deg, rgba(229,229,229,1) 0%, rgba(172,172,172,1) 100%);
+    font-family: "chiaroStd", serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    
+    
+}
+
 .game{
+    width: 950px;
+    height: 700px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-image: radial-gradient(circle, rgba(40,74,92,1) 0%, rgba(14,25,30,1) 100%);
+    color: white;
 }
 h1{
     text-align: center;
@@ -26,6 +49,7 @@ button{
     border-style: none;
     background-color: transparent;
     transition: 0.2s;
+    font-family: "chiaroStd",serif;
 }
 button:hover{
     transform: scale(1.1);
@@ -34,12 +58,28 @@ button:hover{
 }
 
 .results{
+    width: 850px;
     text-align: center;
+    background-color: #BF8D43;
+    border: #C8A668;
+    border-style: solid;
+    border-radius: 13px;
+    color: #4A3518;
+    border-width: 5px;
 }
 
 .replay-btn{
     border: solid;
-    background-color: aliceblue;
+    border-color: #A59A8B;
+    border-width: 1px;
+    background-image: linear-gradient(164deg, rgba(164,117,97,1) 0%, rgba(70,33,20,1) 100%);
+    color: #E4DACC;
+    width: 280px;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    font-size: 32px;
 }
 
 .replay-btn:hover{
@@ -54,13 +94,17 @@ button:hover{
 .status{
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 400px;
 }
 
 .health-bar{
-    width: 100%;
+    width: 270px;
     height: 20px;
     background-color: green;
+    margin: auto 40px;
+}
+.right{
+    align-self: end;
 }
 
 .health-80{
