@@ -1,36 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Piedra, papel o tijeras</title>
     <script src="./script.js" defer></script>
     <link href="./style.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="game">
         <div class="score">
             <div class="status azul">
                 <div class="nombres">
-                    <h3>Chrom</h3>
+                    <h3>Sully</h3>
                 </div>
                 <div class="health-container left">
                     <div class="health-bar" data-type="health-bar"></div>
                 </div>
-                <p data-puntaje="jugador"></p>
+                <p data-arma="Sully"></p>
             </div>
             <div class="status rojo">
                 <div class="nombres">
-                    <h3>Walhart</h3>
+                    <h3>Frederick</h3>
                 </div>
                 <div class="health-container right">
                     <div class="health-bar" data-type="health-bar"></div>
                 </div>
-                <p data-puntaje="cpu"></p>
+                <p data-arma="Frederick"></p>
             </div>
         </div>
         <div class="results">
-            <h3>Ronda</h3>
-            <p data-puntaje="ronda"></p>
+            <img src="./images/Sully.png" alt="Sully portrait">
+            <div class="text-div">
+                <h3>Ronda</h3>
+                <p data-puntaje="ronda"></p>
+            </div>
+            <img src="./images/Frederick.png" alt="Frederick portrait">
         </div>
         <div class="botones">
             <ul>
@@ -39,6 +45,6 @@
                 <li><button class="sword" data-weapon="tijeras"><img src="./images/sword.png" alt="sword"></button></li>
             </ul>
         </div>
-    </div>
 </body>
+
 </html>

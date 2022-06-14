@@ -6,18 +6,15 @@ const btnSword = document.querySelector(".sword");
 const btnAxe = document.querySelector(".axe");
 const btns = document.querySelectorAll("button");
 const results = document.querySelector(".results");
+const textDiv = document.querySelector(".text-div");
 const para = document.createElement("p");
-const pJugador = document.querySelector(`[data-puntaje="jugador"]`);
-const pCpu = document.querySelector(`[data-puntaje="cpu"]`);
+const pJugador = document.querySelector(`[data-arma="Sully"]`);
+const pCpu = document.querySelector(`[data-arma="Frederick"]`);
 const ronda = document.querySelector(`[data-puntaje="ronda"]`);
 const btn = document.createElement("button");
 const barras = document.querySelectorAll(`[data-type="health-bar"]`);
 
-
-pJugador.textContent = 0;
-pCpu.textContent = 0;
 ronda.textContent = 0;
-para.textContent = "El resultado es";
 
 // Arreglo de opciones
 const ELEMENTOS = ["sword", "axe", "lance"];
@@ -30,7 +27,6 @@ function counterPlay() {
 
 // Juega una ronda
 function playRound(computerSelection, playerSelection) {
-    para.textContent += computerSelection;
     let estadoDeRonda;
 
     if (playerSelection === null) {
@@ -50,7 +46,7 @@ function playRound(computerSelection, playerSelection) {
 
     if (playerSelection === computerSelection) {
         para.textContent = "Empate, que chafa";
-        results.appendChild(para);
+        textDiv.appendChild(para);
         estadoDeRonda = ESTADODERONDA_EMPATE;
         return estadoDeRonda;
     } else if (playerSelection === "lance" && computerSelection
@@ -58,13 +54,13 @@ function playRound(computerSelection, playerSelection) {
         === "sword" || playerSelection === "sword" && computerSelection
         === "lance") {
         para.textContent = `Naaambre, que perdedor, ${computerSelection} le gana a ${playerSelection}`;
-        results.appendChild(para);
+        textDiv.appendChild(para);
         estadoDeRonda = ESTADODERONDA_GANACPU;
         
         return estadoDeRonda;
     } else {
         para.textContent = `Buena campeón, ${playerSelection} le gana a ${computerSelection}`;
-        results.appendChild(para);
+        textDiv.appendChild(para);
         estadoDeRonda = ESTADODERONDA_GANAJUGADOR;
         
         return estadoDeRonda;
@@ -157,7 +153,11 @@ let pcScore = 0;
 function chooseWeapon(e) {
     para.textContent += e.currentTarget.classList.value;
     let turno;
-    turno = playRound(counterPlay(), e.currentTarget.classList.value);
+    eleccionCPU = counterPlay();
+    eleccionJugador = e.currentTarget.classList.value;
+    pJugador.textContent = eleccionJugador;
+    pCpu.textContent = eleccionCPU;
+    turno = playRound(eleccionCPU, eleccionJugador);
 
     if (turno === "empate") {
 
@@ -173,8 +173,6 @@ function chooseWeapon(e) {
     round++;
 
     ronda.textContent = round;
-    pJugador.textContent = playerScore;
-    pCpu.textContent = pcScore;
 
     if (pcScore === 5 || playerScore === 5) {
         let ganador;
@@ -208,8 +206,8 @@ function resetearJuego() {
     playerScore = 0;
     pcScore = 0;
     ronda.textContent = round;
-    pJugador.textContent = playerScore;
-    pCpu.textContent = pcScore;
+    pJugador.textContent = "";
+    pCpu.textContent = "";
     para.textContent = "";
     const btnRowChildren = btnRow.children;
     barras.forEach(barra => barra.classList="health-bar");

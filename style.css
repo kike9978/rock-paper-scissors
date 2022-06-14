@@ -6,6 +6,7 @@
 *{
     box-sizing: border-box;
     font-size: 32px;
+    margin: 0;
 }
 
 body{
@@ -99,6 +100,29 @@ h2{
     width: 0%;
     transition-duration: 1s;
 }
+.results{
+    width: 850px;
+    height: 186px;
+    text-align: center;
+    background-color: #BF8D43;
+    border: #C8A668;
+    border-style: solid;
+    border-radius: 13px;
+    color: #4A3518;
+    border-width: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.text-div{
+    background-color: #E9CE9B;
+    height: 135px;
+    width: 482px;
+    border-radius: 9px;
+}
+.text-div p{
+    font-size: 16px;
+}
 
 .botones{
     width: 100%;
@@ -144,18 +168,6 @@ button:hover{
     transform: scale(1.1);
 }
 
-.results{
-    width: 850px;
-    height: 186px;
-    text-align: center;
-    background-color: #BF8D43;
-    border: #C8A668;
-    border-style: solid;
-    border-radius: 13px;
-    color: #4A3518;
-    border-width: 5px;
-
-}
 .replay-btn{
     margin-right: 57px;
     background-image: linear-gradient(164deg, rgba(164,117,97,1) 0%, rgba(70,33,20,1) 100%);
