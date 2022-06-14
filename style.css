@@ -5,6 +5,7 @@
 
 *{
     box-sizing: border-box;
+    font-size: 32px;
 }
 
 body{
@@ -13,12 +14,12 @@ body{
     height: 100vh;
     display: flex;
     justify-content: center;
-    
+    align-items: center;
     
 }
 
 .game{
-    width: 950px;
+    width: 964px;
     height: 700px;
     display: flex;
     justify-content: center;
@@ -27,63 +28,29 @@ body{
     background-image: radial-gradient(circle, rgba(40,74,92,1) 0%, rgba(14,25,30,1) 100%);
     color: white;
 }
+.status{
+    height: 186px;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    border-radius: 13px;
+    border-width: 4px;
+    border-style: solid;
+    align-items: center;
+}
+.rojo{
+background-image: linear-gradient(180deg, rgba(88,19,28,1) 0%, rgba(59,20,20,1) 100%);
+border-color: #554541;
+}
+.azul{
+    background-image: linear-gradient(180deg, rgba(16,38,54,1) 0%, rgba(14,28,42,1) 100%);
+    border-color: #2B3549;
+}
 h1{
     text-align: center;
 }
 h2{
     text-align: center;
-}
-ul{
-    display: flex;
-    padding: 0;
-}
-li{
-    padding: 10px;
-    list-style: none;
-}
-button{
-    display: flex;
-    cursor: pointer;
-    height: fit-content;
-    padding: 0;
-    border-style: none;
-    background-color: transparent;
-    transition: 0.2s;
-    font-family: "chiaroStd",serif;
-}
-button:hover{
-    transform: scale(1.1);
-    border-style: solid;
-    border-color: rgb(247, 32, 53);
-}
-
-.results{
-    width: 850px;
-    text-align: center;
-    background-color: #BF8D43;
-    border: #C8A668;
-    border-style: solid;
-    border-radius: 13px;
-    color: #4A3518;
-    border-width: 5px;
-}
-
-.replay-btn{
-    border: solid;
-    border-color: #A59A8B;
-    border-width: 1px;
-    background-image: linear-gradient(164deg, rgba(164,117,97,1) 0%, rgba(70,33,20,1) 100%);
-    color: #E4DACC;
-    width: 280px;
-    border-radius: 5px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    font-size: 32px;
-}
-
-.replay-btn:hover{
-    border-color: rgb(44, 114, 114);
 }
 
 .score{
@@ -91,20 +58,24 @@ button:hover{
     flex-direction: row;
     gap: 20px;
 }
-.status{
-    display: flex;
-    flex-direction: column;
-    width: 400px;
+.health-container{
+    width: 270px;
+    height: 23px;
+    margin: auto 40px;
 }
 
 .health-bar{
-    width: 270px;
-    height: 20px;
-    background-color: green;
-    margin: auto 40px;
+    width: 100%;
+    height: 23px;
+    background-image: linear-gradient(180deg, rgba(202,209,137,1) 0%, rgba(75,72,45,1) 100%);;
+}
+.left{
+    align-self: flex-start;
 }
 .right{
-    align-self: end;
+    align-self: flex-end;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .health-80{
@@ -127,4 +98,76 @@ button:hover{
 .health-0{
     width: 0%;
     transition-duration: 1s;
+}
+
+.botones{
+    width: 100%;
+    min-height: 100px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+ul{
+    display: flex;
+    margin-top: 0;
+    margin-left: 57px;
+    margin-bottom: 0;
+    padding: 0;
+}
+li{
+    padding: 0 10px;
+    list-style: none;
+}
+button{
+    width: auto;
+    height: auto;
+    display: flex;
+    cursor: pointer;
+    height: fit-content;
+    padding: 0;
+    border-style: none;
+    background-color: transparent;
+    transition: 0.2s;
+    font-family: "chiaroStd",serif;
+    border: solid;
+    border-color: #A59A8B;
+    border-width: 1px;
+    border-radius: 5px;
+}
+
+button img{
+    border-radius: 5px;
+}
+
+button:hover{
+    transform: scale(1.1);
+}
+
+.results{
+    width: 850px;
+    height: 186px;
+    text-align: center;
+    background-color: #BF8D43;
+    border: #C8A668;
+    border-style: solid;
+    border-radius: 13px;
+    color: #4A3518;
+    border-width: 5px;
+
+}
+.replay-btn{
+    margin-right: 57px;
+    background-image: linear-gradient(164deg, rgba(164,117,97,1) 0%, rgba(70,33,20,1) 100%);
+    color: #E4DACC;
+    width: 280px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    font-size: 32px;
+    align-self: flex-end;
+}
+
+.replay-btn:hover{
+    border-color: rgb(44, 114, 114);
 }

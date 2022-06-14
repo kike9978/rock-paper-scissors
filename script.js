@@ -1,4 +1,5 @@
 const game = document.querySelector(".game");
+const btnRow = document.querySelector(".botones"); 
 const h1 = document.querySelector("h1");
 const btnLance = document.querySelector(".lance");
 const btnSword = document.querySelector(".sword");
@@ -197,7 +198,7 @@ function volverAJugar() {
     btn.textContent = "Volver a jugar";
     btn.classList.value = "replay-btn";
     btn.setAttribute("data-type", "reset-btn")
-    game.appendChild(btn);
+    btnRow.appendChild(btn);
     btn.addEventListener("click", () => btns.forEach(btn => btn.addEventListener("click", chooseWeapon)));
     btn.addEventListener("click", resetearJuego);
 }
@@ -210,11 +211,11 @@ function resetearJuego() {
     pJugador.textContent = playerScore;
     pCpu.textContent = pcScore;
     para.textContent = "";
-    const gameChildren = game.children;
+    const btnRowChildren = btnRow.children;
     barras.forEach(barra => barra.classList="health-bar");
-    for (let i = 0; i < gameChildren.length; i++) {
-        if (gameChildren[i].getAttribute("data-type") === "reset-btn") {
-            gameChildren[i].remove();
+    for (let i = 0; i < btnRowChildren.length; i++) {
+        if (btnRowChildren[i].getAttribute("data-type") === "reset-btn") {
+            btnRowChildren[i].remove();
         }
     }
 }

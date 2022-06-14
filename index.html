@@ -1,46 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Piedra, papel o tijeras</title>
     <script src="./script.js" defer></script>
     <link href="./style.css" rel="stylesheet">
 </head>
-
 <body>
     <div class="game">
-        <h1>Es hora de las peleas épicas</h1>
-        <h2>Escoge tu arma</h2>
-        
-        
-        <ul>
-        <li><button class="axe" data-weapon="piedra"><img src="./images/axe.png" alt="axe"></button></li>
-        <li><button class="lance" data-weapon="papel"><img src="./images/lance.png" alt="lance"></button></li>
-        <li><button class="sword" data-weapon="tijeras"><img src="./images/sword.png" alt="sword"></button></li>
-        </ul>
-
+        <div class="score">
+            <div class="status azul">
+                <div class="nombres">
+                    <h3>Chrom</h3>
+                </div>
+                <div class="health-container left">
+                    <div class="health-bar" data-type="health-bar"></div>
+                </div>
+                <p data-puntaje="jugador"></p>
+            </div>
+            <div class="status rojo">
+                <div class="nombres">
+                    <h3>Walhart</h3>
+                </div>
+                <div class="health-container right">
+                    <div class="health-bar" data-type="health-bar"></div>
+                </div>
+                <p data-puntaje="cpu"></p>
+            </div>
+        </div>
         <div class="results">
             <h3>Ronda</h3>
             <p data-puntaje="ronda"></p>
-            <div class="score">
-                <div class="status">
-                    <h3>Chrom</h3>
-                    <div class="health-bar" data-type="health-bar"></div>
-                    <p data-puntaje="jugador"></p>
-                </div>
-                <div class="status">
-                    <h3>Walhart</h3>
-                    <div class="health-bar right" data-type="health-bar"></div>
-                    <p data-puntaje="cpu"></p>
-                </div>
-            </div>
+        </div>
+        <div class="botones">
+            <ul>
+                <li><button class="axe" data-weapon="piedra"><img src="./images/axe.png" alt="axe"></button></li>
+                <li><button class="lance" data-weapon="papel"><img src="./images/lance.png" alt="lance"></button></li>
+                <li><button class="sword" data-weapon="tijeras"><img src="./images/sword.png" alt="sword"></button></li>
+            </ul>
         </div>
     </div>
-
-   
-
 </body>
-
-
 </html>
