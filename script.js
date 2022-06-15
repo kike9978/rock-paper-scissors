@@ -16,10 +16,8 @@ const barras = document.querySelectorAll(`[data-type="health-bar"]`);
 const audioOpcion = document.querySelector(`[data-sound="opcion"]`);
 const audioEmpate = document.querySelector(`[data-sound="empate"]`);
 const audiosArma = document.querySelectorAll(`[data-sound="guamazo"]`);
-console.log(audiosArma);
-
-
-console.log(audioOpcion);
+const audioVictoria = document.querySelector(`[data-sound="victoria"]`);
+const audioDerrota = document.querySelector(`[data-sound="derrota"]`);
 
 ronda.textContent = 0;
 
@@ -148,7 +146,12 @@ function cancelarJuego() {
 }
 
 btns.forEach(btn => btn.addEventListener("click", chooseWeapon));
-btns.forEach(btn => btn.addEventListener("mouseover", () => audioOpcion.play()))
+btns.forEach(btn => btn.addEventListener("mouseover", playOpcion))
+
+
+function playOpcion(){
+    audioOpcion.play();
+}
 
 
 
@@ -190,8 +193,10 @@ function chooseWeapon(e) {
         let ganador;
         if (pcScore > playerScore) {
             ganador = "la CPU";
+            audioDerrota.play();
         } else {
             ganador = "el jugador"
+            audioVictoria.play();
         }
         para.textContent = `Se acabó, el ganador es ${ganador}`;
         btns.forEach(btn => btn.removeEventListener("click", chooseWeapon));
@@ -209,6 +214,7 @@ function volverAJugar() {
     btn.textContent = "Volver a jugar";
     btn.classList.value = "replay-btn";
     btn.setAttribute("data-type", "reset-btn")
+    btn.addEventListener("mouseover", playOpcion);
     btnRow.appendChild(btn);
     btn.addEventListener("click", () => btns.forEach(btn => btn.addEventListener("click", chooseWeapon)));
     btn.addEventListener("click", resetearJuego);
