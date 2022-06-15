@@ -1,5 +1,5 @@
 const game = document.querySelector(".game");
-const btnRow = document.querySelector(".botones"); 
+const btnRow = document.querySelector(".botones");
 const h1 = document.querySelector("h1");
 const btnLance = document.querySelector(".lance");
 const btnSword = document.querySelector(".sword");
@@ -13,6 +13,13 @@ const pCpu = document.querySelector(`[data-arma="Frederick"]`);
 const ronda = document.querySelector(`[data-puntaje="ronda"]`);
 const btn = document.createElement("button");
 const barras = document.querySelectorAll(`[data-type="health-bar"]`);
+const audioOpcion = document.querySelector(`[data-sound="opcion"]`);
+const audioEmpate = document.querySelector(`[data-sound="empate"]`);
+const audiosArma = document.querySelectorAll(`[data-sound="guamazo"]`);
+console.log(audiosArma);
+
+
+console.log(audioOpcion);
 
 ronda.textContent = 0;
 
@@ -25,20 +32,15 @@ function counterPlay() {
     return tiroDeCompu;
 }
 
+function playBattleSound() {
+    let audioArma = audiosArma[Math.floor((Math.random() * audiosArma.length))];
+    audioArma.play();
+}
+
 // Juega una ronda
 function playRound(computerSelection, playerSelection) {
-    let estadoDeRonda;
 
-    if (playerSelection === null) {
-        if (confirm("¿Quieres salir del juego?")) {
-            para.textContent += "Tu te lo pierdes, al fin que ni quería";
-            estadoDeRonda = "termino";
-            return estadoDeRonda;
-        } else {
-            para.textContent += "bueno";
-            return playRound(computerSelection);
-        }
-    }
+    let estadoDeRonda;
 
     const ESTADODERONDA_EMPATE = "empate";
     const ESTADODERONDA_GANAJUGADOR = "ganador";
@@ -47,6 +49,7 @@ function playRound(computerSelection, playerSelection) {
     if (playerSelection === computerSelection) {
         para.textContent = "Empate, que chafa";
         textDiv.appendChild(para);
+        audioEmpate.play();
         estadoDeRonda = ESTADODERONDA_EMPATE;
         return estadoDeRonda;
     } else if (playerSelection === "lance" && computerSelection
@@ -55,80 +58,86 @@ function playRound(computerSelection, playerSelection) {
         === "lance") {
         para.textContent = `Naaambre, que perdedor, ${computerSelection} le gana a ${playerSelection}`;
         textDiv.appendChild(para);
+        playBattleSound();
         estadoDeRonda = ESTADODERONDA_GANACPU;
-        
+
         return estadoDeRonda;
     } else {
         para.textContent = `Buena campeón, ${playerSelection} le gana a ${computerSelection}`;
         textDiv.appendChild(para);
+        playBattleSound();
         estadoDeRonda = ESTADODERONDA_GANAJUGADOR;
-        
+
         return estadoDeRonda;
     }
 }
 
 function reducirVida() {
 
-switch(playerScore){
-    case 1:{
-        barras[1].classList += " health-80";
-        break;
+    switch (playerScore) {
+        case 1: {
+            barras[1].classList += " health-80";
+            break;
+        }
+        case 2: {
+            barras[1].classList += " health-60";
+            barras[1].classList.remove("health-80");
+            break;
+        }
+        case 3: {
+            barras[1].classList += " health-40";
+            barras[1].classList.remove("health-60");
+            break;
+        }
+        case 4: {
+            barras[1].classList += " health-20";
+            barras[1].classList.remove("health-40");
+            break;
+        }
+        case 5: {
+            barras[1].classList += " health-0";
+            barras[1].classList.remove("health-20");
+            break;
+        }
+        default: {
+            break;
+        }
+
     }
-    case 2:{
-        barras[1].classList += " health-60";
-        barras[1].classList.remove("health-80");
-        break;
-    }
-    case 3:{
-        barras[1].classList += " health-40";
-        barras[1].classList.remove("health-60");
-        break;
-    }
-    case 4:{
-        barras[1].classList += " health-20";
-        barras[1].classList.remove("health-40");
-        break;
-    }
-    case 5:{
-        barras[1].classList += " health-0";
-        barras[1].classList.remove("health-20");
-        break;
-    }
-    default:{
-        break;
+    switch (pcScore) {
+        case 1: {
+            barras[0].classList += " health-80";
+            break;
+        }
+        case 2: {
+            barras[0].classList += " health-60";
+            barras[0].classList.remove("health-80");
+            break;
+        }
+        case 3: {
+            barras[0].classList += " health-40";
+            barras[0].classList.remove("health-60");
+            break;
+        }
+        case 4: {
+            barras[0].classList += " health-20";
+            barras[0].classList.remove("health-40");
+            break;
+        }
+        case 5: {
+            barras[0].classList += " health-0";
+            barras[0].classList.remove("health-20");
+            break;
+        }
+        default: {
+            break;
+        }
+
     }
 
 }
-switch(pcScore){
-    case 1:{
-        barras[0].classList += " health-80";
-        break;
-    }
-    case 2:{
-        barras[0].classList += " health-60";
-        barras[0].classList.remove("health-80");
-        break;
-    }
-    case 3:{
-        barras[0].classList += " health-40";
-        barras[0].classList.remove("health-60");
-        break;
-    }
-    case 4:{
-        barras[0].classList += " health-20";
-        barras[0].classList.remove("health-40");
-        break;
-    }
-    case 5:{
-        barras[0].classList += " health-0";
-        barras[0].classList.remove("health-20");
-        break;
-    }
-    default:{
-        break;
-    }
 
-}
+function reproducirSonido() {
 
 }
 
@@ -139,6 +148,9 @@ function cancelarJuego() {
 }
 
 btns.forEach(btn => btn.addEventListener("click", chooseWeapon));
+btns.forEach(btn => btn.addEventListener("mouseover", () => audioOpcion.play()))
+
+
 
 let round = 1;
 ronda.textContent = round;
@@ -184,6 +196,7 @@ function chooseWeapon(e) {
         para.textContent = `Se acabó, el ganador es ${ganador}`;
         btns.forEach(btn => btn.removeEventListener("click", chooseWeapon));
         volverAJugar();
+
     }
 
 }
@@ -210,7 +223,7 @@ function resetearJuego() {
     pCpu.textContent = "";
     para.textContent = "";
     const btnRowChildren = btnRow.children;
-    barras.forEach(barra => barra.classList="health-bar");
+    barras.forEach(barra => barra.classList = "health-bar");
     for (let i = 0; i < btnRowChildren.length; i++) {
         if (btnRowChildren[i].getAttribute("data-type") === "reset-btn") {
             btnRowChildren[i].remove();
