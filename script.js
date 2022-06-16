@@ -54,14 +54,14 @@ function playRound(computerSelection, playerSelection) {
         === "axe" || playerSelection === "axe" && computerSelection
         === "sword" || playerSelection === "sword" && computerSelection
         === "lance") {
-        para.textContent = `Naaambre, que perdedor, ${computerSelection} le gana a ${playerSelection}`;
+        para.textContent = `¡Recibes daño! ${computerSelection} le gana a ${playerSelection}`;
         textDiv.appendChild(para);
         playBattleSound();
         estadoDeRonda = ESTADODERONDA_GANACPU;
 
         return estadoDeRonda;
     } else {
-        para.textContent = `Buena campeón, ${playerSelection} le gana a ${computerSelection}`;
+        para.textContent = `Buena esa, ${playerSelection} le gana a ${computerSelection}`;
         textDiv.appendChild(para);
         playBattleSound();
         estadoDeRonda = ESTADODERONDA_GANAJUGADOR;
@@ -135,35 +135,20 @@ function reducirVida() {
 
 }
 
-function reproducirSonido() {
-
-}
-
-
-
-function cancelarJuego() {
-    // Cancela el juego no?
-}
-
 btns.forEach(btn => btn.addEventListener("click", chooseWeapon));
 btns.forEach(btn => btn.addEventListener("mouseover", playOpcion))
-
 
 function playOpcion(){
     audioOpcion.play();
 }
-
-
 
 let round = 1;
 ronda.textContent = round;
 let playerScore = 0;
 let pcScore = 0;
 
-
 // With each botton click compares the 2 picks and display the result
 // Also keeps the score
-
 
 function chooseWeapon(e) {
     para.textContent += e.currentTarget.classList.value;
@@ -192,22 +177,20 @@ function chooseWeapon(e) {
     if (pcScore === 5 || playerScore === 5) {
         let ganador;
         if (pcScore > playerScore) {
-            ganador = "la CPU";
+            ganador = "Frederick";
+            para.textContent = `Que triste, perdiste 😢`;
             audioDerrota.play();
         } else {
-            ganador = "el jugador"
+            ganador = "Sully"
+            para.textContent = `Felicidades, ¡has ganado!`;
             audioVictoria.play();
         }
-        para.textContent = `Se acabó, el ganador es ${ganador}`;
         btns.forEach(btn => btn.removeEventListener("click", chooseWeapon));
         volverAJugar();
 
     }
 
 }
-
-
-
 
 function volverAJugar() {
 
@@ -225,8 +208,8 @@ function resetearJuego() {
     playerScore = 0;
     pcScore = 0;
     ronda.textContent = round;
-    pJugador.textContent = "";
-    pCpu.textContent = "";
+    pJugador.textContent = "arma";
+    pCpu.textContent = "arma";
     para.textContent = "";
     const btnRowChildren = btnRow.children;
     barras.forEach(barra => barra.classList = "health-bar");
