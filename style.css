@@ -20,6 +20,7 @@ body{
 }
 
 .game{
+    position: relative;
     width: 964px;
     height: 700px;
     display: flex;
@@ -55,6 +56,8 @@ h2{
 }
 
 .score{
+    position: relative;
+    bottom: -22px;
     display: flex;
     flex-direction: row;
     gap: 20px;
