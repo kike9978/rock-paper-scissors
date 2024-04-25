@@ -40,12 +40,12 @@ function playRound(computerSelection, playerSelection) {
 
     let estadoDeRonda;
 
-    const ESTADODERONDA_EMPATE = "draw";
-    const ESTADODERONDA_GANAJUGADOR = "winner";
-    const ESTADODERONDA_GANACPU = "loser";
+    const ESTADODERONDA_EMPATE = "empate";
+    const ESTADODERONDA_GANAJUGADOR = "ganador";
+    const ESTADODERONDA_GANACPU = "perdedor";
 
     if (playerSelection === computerSelection) {
-        para.textContent = "Draw, what a shame";
+        para.textContent = "Empate, que chafa";
         textDiv.appendChild(para);
         audioEmpate.play();
         estadoDeRonda = ESTADODERONDA_EMPATE;
@@ -54,14 +54,14 @@ function playRound(computerSelection, playerSelection) {
         === "axe" || playerSelection === "axe" && computerSelection
         === "sword" || playerSelection === "sword" && computerSelection
         === "lance") {
-        para.textContent = `¡You received damage! ${computerSelection} beats ${playerSelection}`;
+        para.textContent = `¡Recibes daño! ${computerSelection} le gana a ${playerSelection}`;
         textDiv.appendChild(para);
         playBattleSound();
         estadoDeRonda = ESTADODERONDA_GANACPU;
 
         return estadoDeRonda;
     } else {
-        para.textContent = `Good one, ${playerSelection} beats ${computerSelection}`;
+        para.textContent = `Buena esa, ${playerSelection} le gana a ${computerSelection}`;
         textDiv.appendChild(para);
         playBattleSound();
         estadoDeRonda = ESTADODERONDA_GANAJUGADOR;
@@ -150,19 +150,13 @@ let pcScore = 0;
 // With each botton click compares the 2 picks and display the result
 // Also keeps the score
 
-function capitalizeFirstLetter(word){
-    const first = word.charAt(0)
-    const remainingLetters = word.slice(1)
-    return `${first.toUpperCase()}${remainingLetters}`
-}
-
 function chooseWeapon(e) {
     para.textContent += e.currentTarget.classList.value;
     let turno;
     eleccionCPU = counterPlay();
     eleccionJugador = e.currentTarget.classList.value;
-    pJugador.textContent = capitalizeFirstLetter(eleccionJugador);
-    pCpu.textContent = capitalizeFirstLetter(eleccionCPU);
+    pJugador.textContent = eleccionJugador;
+    pCpu.textContent = eleccionCPU;
     turno = playRound(eleccionCPU, eleccionJugador);
 
     if (turno === "empate") {
@@ -184,11 +178,11 @@ function chooseWeapon(e) {
         let ganador;
         if (pcScore > playerScore) {
             ganador = "Frederick";
-            para.textContent = `So sad, you loose 😢`;
+            para.textContent = `Que triste, perdiste 😢`;
             audioDerrota.play();
         } else {
             ganador = "Sully"
-            para.textContent = `Congrats, You win!`;
+            para.textContent = `Felicidades, ¡has ganado!`;
             audioVictoria.play();
         }
         btns.forEach(btn => btn.removeEventListener("click", chooseWeapon));
@@ -200,7 +194,7 @@ function chooseWeapon(e) {
 
 function volverAJugar() {
 
-    btn.textContent = "Play again";
+    btn.textContent = "Volver a jugar";
     btn.classList.value = "replay-btn";
     btn.setAttribute("data-type", "reset-btn")
     btn.addEventListener("mouseover", playOpcion);
@@ -214,8 +208,8 @@ function resetearJuego() {
     playerScore = 0;
     pcScore = 0;
     ronda.textContent = round;
-    pJugador.textContent = "Choose your weapon";
-    pCpu.textContent = "";
+    pJugador.textContent = "arma";
+    pCpu.textContent = "arma";
     para.textContent = "";
     const btnRowChildren = btnRow.children;
     barras.forEach(barra => barra.classList = "health-bar");
