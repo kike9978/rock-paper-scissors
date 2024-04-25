@@ -213,7 +213,7 @@ function resetearJuego() {
     playerScore = 0;
     pcScore = 0;
     ronda.textContent = round;
-    pJugador.textContent = "Weapon";
+    pJugador.textContent = "Choose weapon";
     pCpu.textContent = "Weapon";
     para.textContent = "";
     const btnRowChildren = btnRow.children;
